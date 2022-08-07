@@ -1,6 +1,6 @@
 const express = require("express");
 const Stripe = require("stripe");
-const stripe = new Stripe("sk_test_51KCnYGFqh8z5O5RzIh4IE3oEkMPepWE5bkpQca5gkig2HbfMTtdnvcUP7JgIitpFScgh4BDgiHMcFzhopbfwPLfi0052kKLBwm");
+
 
 const cors = require("cors");
 
@@ -11,14 +11,16 @@ app.use(express.json());
 
 app.post("/api/checkout", async (req, res) => {
   // you can get more data to find in a database, and so on
-  const { id, amount } = req.body;
-
+  const { id, amount, title, description, api_secret } = req.body;
+  const stripe = new Stripe(api_secret);
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
       currency: "USD",
       payment_method: id,
-      confirm: true, //confirm the payment at the same time
+      confirm: true,
+      name: title,
+      description: description,
     });
 
     console.log(payment);

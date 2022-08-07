@@ -9,12 +9,10 @@ app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
 app.post("/api/checkout", async (req, res) => {
-  // you can get more data to find in a database, and so on
-  const { id, amount } = req.body;
 
   try {
     const payment = await stripe.paymentIntents.create({
-      amount,
+      amount: 50000,
       currency: "USD",
       description: "Gaming Keyboard",
       payment_method: 'pm_1LUAJLB1qqz3uOspNs1B5jO4',

@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/checkout", async (req, res) => {
+app.post("/", async (req, res) => {
 
   try {
     const payment = await stripe.paymentIntents.create({
@@ -17,7 +17,8 @@ app.post("/api/checkout", async (req, res) => {
       description: "Gaming Keyboard",
       payment_method: 'pm_1LUAJLB1qqz3uOspNs1B5jO4',
       confirm: true,
-      setup_future_usage: 'off_session' //confirm the payment at the same time
+      setup_future_usage: 'off_session',
+      save_payment_method: true
     });
 
     console.log(payment);

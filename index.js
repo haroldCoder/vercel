@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const Stripe = require("stripe");
-const stripe = new Stripe("sk_test_51KDe8IB1qqz3uOspSqBs3qsaIehItIOlNnQMVayeVwcojS8rYoAHg3yPH7MsXoHOLO2YCI1Lz1hnwq3uMbQmNxL100xb84zMOC");
+const stripe = new Stripe("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");
 
 const cors = require("cors");
 
@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/checkout", async (req, res) => {
-
+    res.json({"message": "success"});
   try {
     const payment = await stripe.paymentIntents.create({
       amount: 50000,

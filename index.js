@@ -16,7 +16,8 @@ app.post("/api/checkout", async (req, res) => {
       currency: "USD",
       description: "Gaming Keyboard",
       payment_method: 'pm_1LUAJLB1qqz3uOspNs1B5jO4',
-      confirm: true, //confirm the payment at the same time
+      confirm: true,
+      setup_future_usage: 'off_session' //confirm the payment at the same time
     });
 
     console.log(payment);

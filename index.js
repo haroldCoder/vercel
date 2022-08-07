@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const Stripe = require("stripe");
-const stripe = new Stripe("<your_secretkey_here>");
+const stripe = new Stripe("sk_test_51KDe8IB1qqz3uOspSqBs3qsaIehItIOlNnQMVayeVwcojS8rYoAHg3yPH7MsXoHOLO2YCI1Lz1hnwq3uMbQmNxL100xb84zMOC");
 
 const cors = require("cors");
 
@@ -17,7 +17,7 @@ app.post("/api/checkout", async (req, res) => {
       amount,
       currency: "USD",
       description: "Gaming Keyboard",
-      payment_method: id,
+      payment_method: 'pm_1LUAJLB1qqz3uOspNs1B5jO4',
       confirm: true, //confirm the payment at the same time
     });
 

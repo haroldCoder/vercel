@@ -1,24 +1,24 @@
-const express = require('express');
-const app = express();
+const express = require("express");
 const Stripe = require("stripe");
-const stripe = new Stripe("sk_test_51KDe8IB1qqz3uOspSqBs3qsaIehItIOlNnQMVayeVwcojS8rYoAHg3yPH7MsXoHOLO2YCI1Lz1hnwq3uMbQmNxL100xb84zMOC");
+const stripe = new Stripe("sk_test_51KCnYGFqh8z5O5RzIh4IE3oEkMPepWE5bkpQca5gkig2HbfMTtdnvcUP7JgIitpFScgh4BDgiHMcFzhopbfwPLfi0052kKLBwm");
 
 const cors = require("cors");
 
-app.use(cors());
+const app = express();
+
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
-app.post("/", async (req, res) => {
+app.post("/api/checkout", async (req, res) => {
+  // you can get more data to find in a database, and so on
+  const { id, amount } = req.body;
 
   try {
     const payment = await stripe.paymentIntents.create({
-      amount: 50000,
+      amount,
       currency: "USD",
-      description: "Gaming Keyboard",
-      payment_method: 'pm_1LUAJLB1qqz3uOspNs1B5jO4',
-      confirm: true,
-      setup_future_usage: 'off_session',
-      save_payment_method: true
+      payment_method: id,
+      confirm: true, //confirm the payment at the same time
     });
 
     console.log(payment);
@@ -30,6 +30,6 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-    console.log('Example app listening on port 5000!');
-})
+app.listen(3001, () => {
+  console.log("Server on port", 3001);
+});

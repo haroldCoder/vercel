@@ -8,7 +8,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/checkout", async (req, res) => {
+app.post("/", async (req, res) => {
     res.json({"message": "success"});
   try {
     const payment = await stripe.paymentIntents.create({
